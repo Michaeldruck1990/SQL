@@ -1,0 +1,46 @@
+--Creating a music store database
+
+CREATE TABLE music_store (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, price INTEGER, rating INTEGER);
+
+INSERT INTO music_store VALUES
+(1, "Alto_Saxophone", 30, 4000, 5);
+INSERT INTO music_store VALUES
+(2, "Tenor_Saxophone", 30, 5500, 5);
+INSERT INTO music_Store VALUES
+(3, "Baritone_Saxophone", 10, 7500, 5);
+INSERT INTO music_store VALUES
+(4, "Reeds", 200, 40, 4);
+INSERT INTO music_store VALUES
+(5, "neck_straps", 150, 25, 5);
+INSERT INTO music_store VALUES
+(6, "Keyboards", 75, 2000, 4);
+INSERT INTO music_store VALUES
+(7, "Guitars", 200, 5000, 5);
+INSERT INTO music_store VALUES
+(8, "Picks", 600, 3, 3);
+INSERT INTO music_store VALUES
+(9, "Guitar_Strings", 550, 10, 4);
+INSERT INTO music_store VALUES
+(10, "Violins", 300, 200, 5);
+INSERT INTO music_store VALUES
+(11, "Bows", 300, 80, 4);
+INSERT INTO music_store VALUES
+(12, "Rosin", 300, 5, 4);
+INSERT INTO music_store VALUES
+(13, "Cases", 1000, 50, 5);
+INSERT INTO music_store VALUES
+(14, "Sheet_Music", 5000, 15, 5);
+INSERT INTO music_store VALUES
+(15, "Misc", 250, 5, 5);
+
+--Display the database ordered by price.
+SELECT * FROM music_store ORDER BY price;
+
+--How many items does the store have?
+SELECT SUM (quantity) FROM music_Store;
+
+--What is the most expensive product sold at the store?
+SELECT MAX (price) FROM music_store;
+
+--What is the least expensive product sold at the store?
+SELECT MIN (price) FROM music_store;
