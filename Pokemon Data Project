@@ -1,3 +1,4 @@
+--Creating a table with all Pokemon in Generations 1-6
 CREATE TABLE pokemon(
   Number     INTEGER,
   Name       TEXT PRIMARY KEY,
@@ -814,14 +815,17 @@ INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_
 INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (720,'HoopaHoopa Unbound','Psychic','Dark',680,80,160,60,170,130,80,6,'True');
 INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (721,'Volcanion','Fire','Water',600,80,110,120,130,90,70,6,'True');
 
+--Selecting the average Attack stat, max HP stat, and min Speed stat from all Pokemon
 SELECT AVG (Attack) FROM "pokemon";
 
 SELECT MAX (HP) FROM "pokemon";
 
 SELECT MIN (Speed) FROM "pokemon";
 
+--Selecting Pokemon with a total base stat of over 650
 SELECT Name, SUM(Total) AS Total_Base_Stats FROM "pokemon" GROUP BY Name HAVING Total_Base_Stats>650;
 
+--Creating a tier list table grouping Pokemon by their base stat total
 /* CASE */
 SELECT COUNT (*),
 CASE
@@ -833,6 +837,8 @@ CASE
     END as "tier_list" FROM pokemon   
 GROUP BY "tier_list";
 
+--Selecting only Pokemon with Speed > 100 and Attack >120
 SELECT * FROM pokemon WHERE speed > 100 AND Attack > 120;
 
+--Selecting only Pokemon with Speed > 120 or classified as a Legendary Pokemon
 SELECT * FROM pokemon WHERE speed > 120 OR Legendary = "True";
