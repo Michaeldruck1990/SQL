@@ -1,0 +1,116 @@
+--Create a table of famous musicians and their birthdate--
+CREATE TABLE musicians (id INTEGER PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    birthdate TEXT);
+
+INSERT INTO musicians (first_name, last_name, birthdate) 
+    VALUES ("Paul", "McCartney", "06-18-1942");
+INSERT INTO musicians (first_name, last_name, birthdate)
+    VALUES ("Bruno", "Mars", "10-08-1985");
+INSERT INTO musicians (first_name, last_name, birthdate)
+    VALUES ("John", "Lennon", "10-09-1940");
+INSERT INTO musicians (first_name, last_name, birthdate)
+    VALUES ("Steven", "Tyler", "03-26-1948");
+INSERT INTO musicians (first_name, last_name, birthdate)
+    VALUES ("Neil", "Peart", "09-12-1952");
+INSERT INTO musicians (first_name, last_name, birthdate)
+    VALUES ("Taylor", "Swift", "12-13-1989");
+INSERT INTO musicians (first_name, last_name, birthdate)
+    VALUES ("Beyonce", "Knowles", "09-04-1981");
+INSERT INTO musicians (first_name, last_name, birthdate)
+    VALUES ("Whitney", "Houston", "08-09-1963");
+ 
+--Create a table of the famous musicians hometowns-- 
+CREATE TABLE hometowns (id INTEGER PRIMARY KEY,
+    musician_id INTEGER,
+    city TEXT,
+    state TEXT);
+    
+INSERT INTO hometowns (musician_id, city, state)
+    VALUES (1, "Liverpool", "England");
+INSERT INTO hometowns (musician_id, city, state) 
+    VALUES (2, "Honalulu", "Hawaii");
+INSERT INTO hometowns (musician_id, city, state)
+    VALUES (3, "Liverpool", "England");
+INSERT INTO hometowns (musician_id, city, state)
+    VALUES (4, "New York City", "New York");
+INSERT INTO hometowns (musician_id, city, state)
+    VALUES (5, "Hamilton", "Ontario");
+INSERT INTO hometowns (musician_id, city, state)
+    VALUES (6, "West Reading", "Pennsylvania");
+INSERT INTO hometowns (musician_id, city, state)
+    VALUES (7, "Houston", "Texas");
+INSERT INTO hometowns (musician_id, city, state)
+    VALUES (8, "Newark", "New Jersey");
+
+--Create a table of famous songs by the famous musicians--
+CREATE TABLE famous_song (id INTEGER PRIMARY KEY,
+    musician_id INTEGER,
+    title TEXT, 
+    release_year TEXT);
+    
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (1, "Maybe I'm Amazed", "1970");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (1, "Hey Jude", "1968");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (1, "Let It Be", "1970");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (2, "Count On Me", "2010");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (2, "24K Magic", "2016");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (3, "Imagine", "1971");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (3, "Help", "1965");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (3, "Glass Onion", "1968");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (3, "Strawberry Fields Forever", "1967");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (4, "Dream On", "1973");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (4, "I Don't Wanna Miss A Thing", "1998");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (5, "Tom Sawyer", "1981");
+INSERT INTO famous_song (musician_id, title, release_year) 
+    VALUES (5, "Closer to the Heart", "1977");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (6, "Shake It Off", "2014");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (6, "Lover", "2019");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (7, "Crazy In Love", "2003");
+INSERT INTO famous_song (musician_id, title, release_year) 
+    VALUES (8, "I Wanna Dance With Somebody", "1987");
+INSERT INTO famous_song (musician_id, title, release_year)
+    VALUES (8, "I Will Always Love You", "1992");
+
+--Creating a table that shows the famous musicians AND their hometowns--
+SELECT musicians.first_name, musicians.last_name, hometowns.city, hometowns.state 
+FROM musicians
+JOIN hometowns
+ON musicians.id = hometowns.musician_id;
+
+--Creating a table showing the musicians AND their famous songs--
+SELECT musicians.first_name, musicians.last_name, famous_song.title, famous_song.release_year
+FROM musicians
+JOIN famous_song
+ON musicians.id = famous_song.musician_id;
+
+--Creating a table that show the famous songs of only John Lennon--
+SELECT musicians.first_name, musicians.last_name, famous_song.title, famous_song.release_year
+FROM musicians
+JOIN famous_song
+ON musicians.id = famous_song.musician_id
+WHERE musicians.first_name = "John";
+
+--Combining all three tables to show all the information about Beyonce--
+SELECT musicians.first_name, musicians.last_name, musicians.birthdate, hometowns.city, hometowns.state, famous_song.title, famous_song.release_year
+FROM musicians
+JOIN hometowns
+ON musicians.id = hometowns.musician_id
+JOIN famous_song
+ON musicians.id = famous_song.musician_id
+WHERE musicians.first_name = "Beyonce"
