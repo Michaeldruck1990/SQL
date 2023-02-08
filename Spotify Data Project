@@ -95,7 +95,7 @@ WHERE tempo > 130
 GROUP BY artist_name, track_name
 ORDER BY tempo desc;
 
---Finally I determined which artists had the least amount of "instrumentalness" in their songs (which songs were majorally vocals).
+--Then I determined which artists had the least amount of "instrumentalness" in their songs (which songs were majorally vocals).
 SELECT 
 artist_name,
 track_name,
@@ -103,3 +103,17 @@ instrumentalness
 FROM BIT_DB.Spotifydata
 GROUP BY artist_name, track_name
 ORDER BY instrumentalness asc;
+
+--Finally, using a CTE, I calculated the average popularity for the artists in the Spotify data table. Then, for every artist with an average popularity of 90 or above, I showed their name, their average popularity, and labeled them as a “Top Star”.
+WITH popularity_average_CTE AS (
+SELECT s.artist_name, 
+AVG(s.popularity) AS average_popularity
+FROM SpotifyData s
+GROUP BY s.artist_name
+)
+
+SELECT artist_name,
+average_popularity,
+'Top Star' AS tag
+FROM popularity_average_CTE
+WHERE average_popularity >= 90;
